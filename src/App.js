@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
+import person from './Person/Person';
 
 const app = (props) => {
   
@@ -13,18 +14,20 @@ const app = (props) => {
   {
     personsState.persons = Object.keys(names).map(key => Object({"name":key,"age":names[key]}))}
   
-
-  
+ 
   function switchNameHandler() {
-    var persons = personsState.persons
-   if  ( persons[0].name !== "Tom"){
-     persons[0] = {name:"Tom", age: 25 }
+    var persons = personsState.persons 
+    console.log(persons.length)
+    const div_number = Math.abs(Math.round(Math.random()*(persons.length-1 )))
+    console.log(div_number)
+   if  ( persons[div_number].name !== "Tom"){
+     persons[div_number] = {name:"Tom", age: 25 }
    }
    else {
-    persons[0] = {name:"Maximilian", age: 29 }
+    persons[div_number] = {name:"Maximilian", age: 29 }
 
    }
-
+ 
    setPersonsState({persons})
   }
     var rows = []
