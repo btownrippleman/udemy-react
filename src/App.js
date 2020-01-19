@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
+import styled from 'styled-components'
 import './App.css';
 import Person from './Person/Person';
+
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? 'red' : 'green'};
+  color: white;
+  font: inherit;
+  border: 1px solid blue;
+  padding: 8px;
+  cursor: pointer;
+  align: auto;
+  &:hover {
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+  }
+
+`;
 
 class App extends Component {
   constructor() {
     super();
-    this.state = { showPersons: true, buttonDisplay: "Clear Info", mappy: "a" }
+    this.state = { showPersons: true, buttonDisplay: "Clear Info" }
     const names = { "Tom": "22", "Dick": "30", "Harry": "45" };
     this.state.persons = Object.keys(names).map((name, index) => Object({ id: this.randomKeyMaker(), name: name, age: names[name] }))
     this.state.personsObject = this.mapMaker(this.state.persons)
@@ -75,27 +91,14 @@ class App extends Component {
 
   render() {
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      align: 'auto',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
-    };
+ 
 
-    let rowsCopy = null
+    let rows = null
     if (this.state.showPersons) {
       console.log(this.state.personsObject)
 
-      style.backgroundColor = "red";
 
-      rowsCopy = (Object.keys(this.state.personsObject)).map((key) => (
+      rows = (Object.keys(this.state.personsObject)).map((key) => (
         <div><Person
           click={() => this.deletePersonHandler(key)}
           name={this.state.personsObject[key].name}
@@ -120,8 +123,9 @@ class App extends Component {
       <div className="App" >
         <h1>This is your future React App Man </h1>
         <p className={classes.join(' ')}> this works!</p>
-        <button style={style} onClick={this.toggleSwitchHandler}>{this.state.buttonDisplay} </button>
-        {rowsCopy}
+        <StyledButton alt={this.state.showPersons} onClick={this.toggleSwitchHandler} > Toggle Persons
+          </StyledButton> 
+        {rows}
       </div>
 
 
@@ -129,4 +133,4 @@ class App extends Component {
 
   }
 }
-export default (App);
+export default App;

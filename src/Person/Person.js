@@ -10,25 +10,22 @@ const StyledDiv = styled.div`
     padding: 16px;
     text-align: center;
 
-@media (min-width: 500px){
-    width: 450px;
-}
+    @media (min-width: 500px){
+        width: 450px;
+    }
 `;
 
 const person = (props) => {
-    const style = {
-        '@media (min-width: 500px)': {
-            width: '450px'
-        }
-    }
+
+
     return (<StyledDiv>
-        <div className="Person" style={style} >
+        <div >
             <p onClick={props.click}>I'm  {props.name} and I am {props.age} years old!</p>
-            <input className="Person" type="text" onChange={props.changed}></input>
+            <input type="text" onChange={props.changed}></input>
         </div>
     </StyledDiv>
 
     );
 }
 
-export default (person);
+export default person;
