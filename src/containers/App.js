@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 // import logo from './logo.svg';
-import styled from 'styled-components'
-import './App.css';
-import Person from './Person/Person';
+// import styled from 'styled-components'
+import classes from './App.css';
+import Persons from "../components/Persons/Persons"
+import Cockpit from "../components/Cockpit/Cockpit"
+
+// import ErrorBoundary from './ErrorBoundary';
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.alt ? 'red' : 'green'};
@@ -38,9 +41,8 @@ class App extends Component {
   }
 
 
-
   deletePersonHandler = (personKey) => {
-    console.log(" personkey = ", personKey)
+    console.log("deletePersonHandler personkey = ", personKey)
     const persons = [...this.state.persons]
     const pObj = { ...this.state.personsObject }
     delete pObj[personKey]
@@ -90,44 +92,32 @@ class App extends Component {
   }
 
   render() {
+    // if (Math.random()< .3){
+    //   throw new Error("somn went wrong")
+    // }
 
- 
+    let btnClass = ''
 
     let rows = null
     if (this.state.showPersons) {
-      console.log(this.state.personsObject)
 
-
-      rows = (Object.keys(this.state.personsObject)).map((key) => (
-        <div><Person
-          click={() => this.deletePersonHandler(key)}
-          name={this.state.personsObject[key].name}
-          age={this.state.personsObject[key].age}
-          key={key}
-          changed={(event) => this.nameChangedHandler(event, key)} />
-        </div>
-      )
+      rows = (<Persons persons={this.state.personsObject}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler}
+      ></Persons>
       )
 
     }
 
-    const classes = []
-    if (this.state.persons.length <= 2) {
-      classes.push('red');
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push('bold');
-    }
 
     return (
-      <div className="App" >
-        <h1>This is your future React App Man </h1>
-        <p className={classes.join(' ')}> this works!</p>
-        <StyledButton alt={this.state.showPersons} onClick={this.toggleSwitchHandler} > Toggle Persons
-          </StyledButton> 
+      <div className={classes.App}>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.personsObject}
+          clicked={this.toggleSwitchHandler} />
         {rows}
       </div>
-
 
     )
 
