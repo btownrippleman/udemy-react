@@ -1,8 +1,15 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import classes from "./Cockpit.css"
 
 const cockpit = (props) => {
-  console.log("cockpit props = ", props)
+  useEffect(()=>
+  {console.log("use effect Cockpit.js")
+setTimeout(()=>{console.log("saving `data` to cloud")},1000),[]
+
+}
+
+
+  )
   const assignedClasses = [];
   let btnClass = "";
 
@@ -17,7 +24,8 @@ const cockpit = (props) => {
   }
   console.log("assignedClasses = ", assignedClasses, "btnClass = ", btnClass)
   return (
-    <div className={classes.Cockpit}><h1>This is your future React App Man </h1>
+    <div className={classes.Cockpit}>
+    <h1>{props.title}</h1>
       <p className={assignedClasses.join(' ')}> this works!</p>
       <button className={btnClass} onClick={props.clicked} > Toggle Persons
           </button>

@@ -23,14 +23,30 @@ import Cockpit from "../components/Cockpit/Cockpit"
 // `;
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    console.log("constructor,",props,App)
+    super(props);
     this.state = { showPersons: true, buttonDisplay: "Clear Info" }
     const names = { "Tom": "22", "Dick": "30", "Harry": "45" };
     this.state.persons = Object.keys(names).map((name, index) => Object({ id: this.randomKeyMaker(), name: name, age: names[name] }))
     this.state.personsObject = this.mapMaker(this.state.persons)
 
   }
+
+  static getDerivedStateFromProps(props, state){
+    console.log("app.js getderivedstatefromprops,", props)
+    return state
+  }
+
+   componentWillMount(){
+    console.log("appjs, componentWillMount")
+  }
+
+  componentDidUpdate()
+  {console.log("appjs, componentDidUpdate")}
+  
+  shouldComponentUpdate()
+  {console.log("appjs shoudcomponent update "); return true}
 
   mapMaker = (arr) => {
     let m = {}
@@ -56,7 +72,7 @@ class App extends Component {
   }
 
   nameChangedHandler = (event, id) => {
-    console.log("namechangehandler id = ", id)
+    // console.log("namechangehandler id = ", id)
 
 
     const person = {
@@ -92,9 +108,10 @@ class App extends Component {
   }
 
   render() {
+    console.log("rendering App.js ")
     // if (Math.random()< .3){
     //   throw new Error("somn went wrong")
-    // }
+    // }./src/containers/App.js
 
     let btnClass = ''
 
@@ -113,6 +130,7 @@ class App extends Component {
     return (
       <div className={classes.App}>
         <Cockpit
+          title={this.props.appTitle}
           showPersons={this.state.showPersons}
           persons={this.state.personsObject}
           clicked={this.toggleSwitchHandler} />

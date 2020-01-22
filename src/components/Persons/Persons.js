@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Person from "./Person/Person"
+console.log("Persons js code reached")
 
-const persons = (props)=> (Object.keys(props.persons)).map(key=>
-    <Person 
-    clicked={()=> props.clicked([key])}
-    name={props.persons[key].name}
-    age={props.persons[key].age}
-    key = {key}
-    changed={(event)=>props.changed(event,[key])}
- />
-    )
+class Persons extends Component{
+   
+    render(){
+
+        return (
+        (Object.keys(this.props.persons)).map(key=>
+            <Person 
+            clicked={()=> this.props.clicked([key])}
+            name={this.props.persons[key].name}
+            age={this.props.persons[key].age}
+            key = {key}
+            changed={(event)=>this.props.changed(event,[key])}/>)
+        )
+    }
+}
 
 
 
 
-export default persons
+export default Persons

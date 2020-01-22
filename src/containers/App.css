@@ -22,6 +22,7 @@
 .App-intro {
   font-size: large;
 }
+
 @media(min-wdith: 500px){
   .App{
       width: 450px;
@@ -66,3 +67,4 @@
 .App button.Red:hover{
   background-color: salmon;
 }
+
